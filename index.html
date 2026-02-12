@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pour Malia ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+            overflow: hidden;
+        }
+
+        .heart {
+            position: fixed;
+            color: red;
+            font-size: 24px;
+            animation: floatUp 2s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-200px) scale(2); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center h-screen">
+
+    <div class="text-center px-6">
+        <h1 class="text-5xl md:text-7xl font-extrabold text-red-600 animate-pulse">
+            Je t'aime Malia, fort fort, bisou bisou, ta grosse tête.
+        </h1>
+        <p class="text-white mt-6 text-lg">Tape sur l'écran ❤️</p>
+    </div>
+
+    <script>
+        function createHeart(x, y) {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = x + "px";
+            heart.style.top = y + "px";
+            heart.style.fontSize = Math.random() * 30 + 20 + "px";
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 2000);
+        }
+
+        document.addEventListener("click", e => {
+            for(let i = 0; i < 5; i++) {
+                const offsetX = (Math.random() - 0.5) * 50;
+                const offsetY = (Math.random() - 0.5) * 50;
+                createHeart(e.clientX + offsetX, e.clientY + offsetY);
+            }
+        });
+
+        document.addEventListener("touchstart", e => {
+            const touch = e.touches[0];
+            for(let i = 0; i < 5; i++) {
+                const offsetX = (Math.random() - 0.5) * 50;
+                const offsetY = (Math.random() - 0.5) * 50;
+                createHeart(touch.clientX + offsetX, touch.clientY + offsetY);
+            }
+        });
+
+        // Cœurs qui tombent automatiquement en arrière-plan
+        setInterval(() => {
+            const x = Math.random() * window.innerWidth;
+            const y = window.innerHeight + 20;
+            createHeart(x, y);
+        }, 500);
+    </script>
+
+</body>
+          </html>
